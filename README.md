@@ -37,7 +37,8 @@ the languages upon which Java is based. These characteristics represent a pure a
    description of a shape. This substitutability is one of the powerful concepts in OOP.
 
 Basic principles of structuring:
-* *Abstraction* from implementation
+
+* *Abstraction* from implementation (?)
 * *Encapsulation* prevents external code from being concerned with the internal workings of an object. This facilitates
   code refactoring, for example allowing the author of the class to change how objects of that class represent their
   data internally without changing any external code (as long as "public" method calls work the same way). It also
@@ -68,7 +69,7 @@ encounter. However, if you look at the logging example again, it is obvious to s
 implementing crosscutting logic on a large scale. Using AOP on its own to develop an entire application is practically
 impossible, given that AOP functions on top of OOP. Likewise, although it is certainly possible to develop entire
 applications by using OOP, you can work smarter by employing AOP to solve certain problems that involve crosscutting
-logic. This chapter covers the following topics:
+logic:
 
 * AOP Concepts As with most technologies, AOP comes with its own specific set of concepts and terms. The following are
   the core concepts of AOP:
@@ -111,16 +112,96 @@ logic. This chapter covers the following topics:
 
 ### Programming patterns
 
+### Software development process
+
+Test-driven development (TDD)
+
+Model Driven Architecture (MDA)
+
+#### Agile
+
+Agile software development values. Based on their combined experience of developing software and helping others do that, the authors of the manifesto declared that they valued:[4]
+
+* **Individuals and interactions** over processes and tools
+* **Working software** over comprehensive documentation
+* **Customer collaboration** over contract negotiation
+* **Responding to change** over following a plan
+
+Agile software development principles. The Manifesto for Agile Software Development is based on twelve principles:
+
+1. Customer satisfaction by early and continuous delivery of valuable software.
+2. Welcome changing requirements, even in late development.
+3. Deliver working software frequently (weeks rather than months).
+4. Close, daily cooperation between business people and developers.
+5. Projects are built around motivated individuals, who should be trusted.
+6. Face-to-face conversation is the best form of communication (co-location).
+7. Working software is the primary measure of progress.
+8. Sustainable development, able to maintain a constant pace.
+9. Continuous attention to technical excellence and good design.
+10. Simplicity—the art of maximizing the amount of work not done—is essential.
+11. Best architectures, requirements, and designs emerge from self-organizing teams.
+12. Regularly, the team reflects on how to become more effective, and adjusts accordingly.
+
 ### JSON, Protocol Buffers (Protobuf)
 
 ### Protocols
 
+- SOAP
 - STOMP
 - HTTP
 - TCP
 -
 
 ### REST, RPC
+
+Representational state transfer (REST) is a software architectural style that was created to guide the design and
+development of the architecture for the World Wide Web. The term representational state transfer was introduced and
+defined in 2000 by computer scientist Roy Fielding in his doctoral dissertation. It means that a server will respond
+with the representation of a resource (today, it will most often be an HTML, XML or JSON document) and that resource
+will contain hypermedia links that can be followed to make the state of the system change. Any such request will in turn
+receive the representation of a resource, and so on.
+
+* Client–server architecture The client-server design pattern enforces the principle of separation of concerns:
+  separating the user interface concerns from the data storage concerns. Portability of the user interface is thus
+  improved. In the case of the Web, a plethora of web browsers have been developed for most platforms without the need
+  for knowledge of any server implementations. Separation also simplifies the server components, improving scalability,
+  but more importantly it allows components to evolve independently (anarchic scalability), which is necessary in an
+  Internet-scale environment that involves multiple organisational domains.
+* Statelessness In computing, a stateless protocol is a communications protocol in which no session information is
+  retained by the receiver, usually a server. Relevant session data is sent to the receiver by the client in such a way
+  that every packet of information transferred can be understood in isolation, without context information from previous
+  packets in the session. This property of stateless protocols makes them ideal in high volume applications, increasing
+  performance by removing server load caused by retention of session information.
+* Cacheability As on the World Wide Web, clients and intermediaries can cache responses. Responses must, implicitly or
+  explicitly, define themselves as either cacheable or non-cacheable to prevent clients from providing stale or
+  inappropriate data in response to further requests. Well-managed caching partially or completely eliminates some
+  client–server interactions, further improving scalability and performance. The cache can be performed at the client
+  machine in memory or browser cache storage. Additionally cache can be stored in a Content Delivery Network (CDN).
+* Layered system A client cannot ordinarily tell whether it is connected directly to the end server or to an
+  intermediary along the way. If a proxy or load balancer is placed between the client and server, it won't affect their
+  communications, and there won't be a need to update the client or server code. Intermediary servers can improve system
+  scalability by enabling load balancing and by providing shared caches. Also, security can be added as a layer on top
+  of the web services, separating business logic from security logic. Adding security as a separate layer enforces
+  security policies. Finally, intermediary servers can call multiple other servers to generate a response to the client.
+* Code on demand (optional)
+  Servers can temporarily extend or customize the functionality of a client by transferring executable code: for
+  example, compiled components such as Java applets, or client-side scripts such as JavaScript.
+* Uniform interface The uniform interface constraint is fundamental to the design of any RESTful system. It simplifies
+  and decouples the architecture, which enables each part to evolve independently. The four constraints for this uniform
+  interface are:
+    * Resource identification in requests - Individual resources are identified in requests, for example using URIs in
+      RESTful Web services. The resources themselves are conceptually separate from the representations that are
+      returned to the client. For example, the server could send data from its database as HTML, XML or as JSON—none of
+      which are the server's internal representation.
+    * Resource manipulation through representations - When a client holds a representation of a resource, including any
+      metadata attached, it has enough information to modify or delete the resource's state.
+    * Self-descriptive messages - Each message includes enough information to describe how to process the message. For
+      example, which parser to invoke can be specified by a media type.
+    * Hypermedia as the engine of application state (HATEOAS) - Having accessed an initial URI for the REST
+      application—analogous to a human Web user accessing the home page of a website—a REST client should then be able
+      to use server-provided links dynamically to discover all the available resources it needs. As access proceeds, the
+      server responds with text that includes hyperlinks to other resources that are currently available. There is no
+      need for the client to be hard-coded with information regarding the structure of the server.
 
 ### Math
 
@@ -176,7 +257,7 @@ TreeMap
 
 ### Java memory model (JMM)
 
-### Concurrency
+### Concurrency in java
 
 Synchronization is required for reliable communication between threads as well as for mutual exclusion.
 
@@ -192,11 +273,267 @@ Synchronization is required for reliable communication between threads as well a
 
 ### Garbage collectors (GC)
 
+*Garbage Collection* tracks each and every object available in the JVM heap space, and removes the unused ones.
+
+Garbage collectors available in Java JDKs include:
+
+* **Serial Garbage Collector**
+
+  This is the simplest GC implementation, as it basically works with a single thread. As a result, this GC
+  implementation freezes all application threads when it runs. Therefore, it's not a good idea to use it in
+  multi-threaded applications, like server environments. However, there was an excellent talk given by Twitter engineers
+  at QCon 2012 about the performance of Serial Garbage Collector, which is a good way to understand this collector
+  better. The Serial GC is the garbage collector of choice for most applications that don't have small pause time
+  requirements and run on client-style machines.
+
+  `java -XX:+UseSerialGC`
+
+* **Parallel Garbage Collector**
+
+  It's the default GC of the JVM, and sometimes called Throughput Collectors. Unlike Serial Garbage Collector, it uses
+  multiple threads for managing heap space, but it also freezes other application threads while performing GC. If we use
+  this GC, we can specify maximum garbage collection threads and pause time, throughput, and footprint (heap size). The
+  numbers of garbage collector threads can be controlled with the command-line option -XX:ParallelGCThreads=<N>. The
+  maximum pause time goal (gap [in milliseconds] between two GC) is specified with the command-line option -XX:
+  MaxGCPauseMillis=<N>. The time spent doing garbage collection versus the time spent outside of garbage collection is
+  called the maximum throughput target and can be specified by the command-line option -XX:GCTimeRatio=<N>. The maximum
+  heap footprint (the amount of heap memory that a program requires while running) is specified using the option -Xmx<N>
+  . Multiple threads are used for minor garbage collection in the Young Generation. A single thread is used for major
+  garbage collection in the Old Generation.
+
+  `java -XX:+UseParallelGC`
+
+* **Concurrent mark sweep (CMS) Garbage Collector**
+
+  The Concurrent Mark Sweep (CMS) implementation uses multiple garbage collector threads for garbage collection. It's
+  designed for applications that prefer shorter garbage collection pauses, and can afford to share processor resources
+  with the garbage collector while the application is running. Simply put, applications using this type of GC respond
+  slower on average, but don't stop responding to perform garbage collection. A quick point to note here is that since
+  this GC is concurrent, an invocation of explicit garbage collection, such as using System.gc() while the concurrent
+  process is working, will result in Concurrent Mode Failure / Interruption. If more than 98% of the total time is spent
+  in CMS garbage collection, and less than 2% of the heap is recovered, then an OutOfMemoryError is thrown by the CMS
+  collector. If necessary, we can disable this feature by adding the option -XX:-UseGCOverheadLimit to the command line.
+  This collector also has a mode known as an incremental mode, which is being deprecated in Java SE 8 and may be removed
+  in a future major release. Support was removed in 14.0
+
+* **Garbage First (G1) Garbage Collector**
+
+  G1 is designed for applications running on multi-processor machines with large memory space. It's available from the
+  JDK7 Update 4 and in later releases. G1 collector will replace the CMS collector, since it's more performance
+  efficient. Unlike other collectors, the G1 collector partitions the heap into a set of equal-sized heap regions, each
+  a contiguous range of virtual memory. When performing garbage collections, G1 shows a concurrent global marking
+  phase (i.e. phase 1, known as Marking) to determine the liveness of objects throughout the heap. After the mark phase
+  is complete, G1 knows which regions are mostly empty. It collects in these areas first, which usually yields a
+  significant amount of free space (i.e. phase 2, known as Sweeping). That's why this method of garbage collection is
+  called Garbage-First. Although G1 is also generational, it does not have separate regions for young and old
+  generations. Instead, each generation is a set of regions, which allows resizing of the young generation in a flexible
+  way. Since G1GC identifies the regions with the most garbage and performs garbage collection on that region first, it
+  is called Garbage First.
+
+  `java -XX:+UseG1GC`
+
+* *C4 (Continuously Concurrent Compacting Collector)*
+
+* *Shenandoah*
+
+* **Z Garbage Collector**
+
+  ZGC is a scalable low-latency garbage collector that debuted in Java 11 as an experimental option for Linux. JDK 14
+  introduced ZGC under the Windows and macOS operating systems. ZGC has obtained the production status from Java 15
+  onwards. ZGC performs all expensive work concurrently, without stopping the execution of application threads for more
+  than 10 ms, which makes it suitable for applications that require low latency. It uses load barriers with colored
+  pointers to perform concurrent operations when the threads are running, and they're used to keep track of heap usage.
+  Reference coloring (colored pointers) is the core concept of ZGC. It means that ZGC uses some bits (metadata bits) of
+  reference to mark the state of the object. It also handles heaps ranging from 8MB to 16TB in size. Furthermore, pause
+  times don't increase with the heap, live-set, or root-set size. Similar to G1, Z Garbage Collector partitions the
+  heap, except that heap regions can have different sizes.
+
+  `java -XX:+UnlockExperimentalVMOptions -XX:+UseZGC`
+
+* **EpsilonGC**
+
+  Promises the lowest GC overhead possible. Epsilon handles memory allocation but does not implement any actual memory
+  reclamation mechanism. Once the available Java heap is exhausted, the JVM will shut down.
+
+  `java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC`
+
 ### ORM: Hibernate, MyBatis and so on
 
 ### Spring
 
+Spring is described as a lightweight framework for building Java applications.
+
+Alternatives to Spring:
+
+* JBoss Seam Framework
+* Google Guice
+* PicoContainer
+* JEE 7 Container (JSR-342)
+* Vert.x
+
+#### Spring Boot
+
+Spring Boot comes with out-of-the-box configurations for different types of Spring applications that are packed in
+starter packages. It takes the guesswork out of manually gathering dependencies and provides some of the most common
+features needed by most applications, such as metrics and health checks. Spring Boot also wraps up all dependencies a
+Spring application needs, taking into account compatibility between versions.
+
 #### Spring core (DI)
+
+The core of the Spring Framework is based on the principle of inversion of control. IoC is a technique that externalizes
+the creation and management of component dependencies. The injection of dependencies at runtime, led to IoC being
+renamed by Martin Fowler as the much more descriptive dependency injection (DI).
+
+Spring’s DI implementation is based on two core Java concepts: JavaBeans and interfaces. When you use Spring as the DI
+provider, you gain the flexibility of defining dependency configuration within your applications in different ways (for
+example, XML files, Java configuration classes, annotations within your code, or the new Groovy bean definition method).
+JavaBeans (POJOs) provide a standard mechanism for creating Java resources that are configurable in a number of ways,
+such as constructors and setter methods. In Chapter 3, you will see how Spring uses the JavaBean specification to form
+the core of its DI configuration model; in fact, any Spring-managed resource is referred to as a bean. If you are
+unfamiliar with JavaBeans, refer to the quick primer we present at the beginning of Chapter 3. Clearly designing and
+coding an application to interfaces makes for a flexible application, but the complexity of wiring together an
+application designed using interfaces is quite high and places an additional coding burden on developers. By using DI,
+you reduce the amount of code you need to use an interface-based design in your application to almost zero. Likewise, by
+using interfaces, you can get the most out of DI because your beans can utilize any interface implementation to satisfy
+their dependency. The use of interfaces also allows Spring to utilize JDK dynamic proxies (the Proxy pattern) to provide
+powerful concepts such as AOP for crosscutting concerns. In the context of DI, Spring acts more like a container than a
+framework—providing instances of your application classes with all the dependencies they need—but it does so in a much
+less intrusive way. Using Spring for DI relies on nothing more than following the JavaBeans naming conventions within
+your classes— there are no special classes from which to inherit or proprietary naming schemes to follow. If anything,
+the only change you make in an application that uses DI is to expose more properties on your JavaBeans, thus allowing
+more dependencies to be injected at runtime.
+
+Java Community Process (JCP) adopted JSR-330 (Dependency Injection for Java) in 2009. Benefits of using DI rather than a
+more traditional approach:
+
+* Reduced glue code: One of the biggest plus points of DI is its ability to dramatically reduce the amount of code you
+  have to write to glue the components of your application together. Often this code is trivial, so creating a
+  dependency involves simply creating a new instance of an object. However, the glue code can get quite complex when you
+  need to look up dependencies in a JNDI repository or when the dependencies cannot be invoked directly, as is the case
+  with remote resources. In these cases, DI can really simplify the glue code by providing automatic JNDI lookup and
+  automatic proxying of remote resources.
+* Simplified application configuration: By adopting DI, you can greatly simplify the process of configuring an
+  application. You can use a variety of options to configure those classes that were injectable to other classes. You
+  can use the same technique to express the dependency requirements to the “injector” for injecting the appropriate bean
+  instance or property. In addition, DI makes it much simpler to swap one implementation of a dependency for another.
+  Consider the case where you have a DAO component that performs data operations against a PostgreSQL database and you
+  want to upgrade to Oracle. Using DI, you can simply reconfigure the appropriate dependency on your business objects to
+  use the Oracle implementation rather than the PostgreSQL one.
+* Ability to manage common dependencies in a single repository: Using a traditional approach to dependency management of
+  common services—for example, data source connection, transaction, and remote services—you create instances (or lookup
+  from some factory classes) of your dependencies where they are needed (within the dependent class). This will cause
+  the dependencies to spread across the classes in your application, and changing them can prove problematic. When you
+  use DI, all the information about those common dependencies is contained in a single repository, making the management
+  of dependencies much simpler and less error prone.
+* Improved testability: When you design your classes for DI, you make it possible to replace dependencies easily. This
+  is especially handy when you are testing your application. Consider a business object that performs some complex
+  processing; for part of this, it uses a DAO to access data stored in a relational database. For your test, you are not
+  interested in testing the DAO; you simply want to test the business object with various sets of data. In a traditional
+  approach, whereby the business object is responsible for obtaining an instance of the DAO itself, you have a hard time
+  testing this, because you are unable to easily replace the DAO implementation with a mock implementation that returns
+  your test data sets. Instead, you need to make sure your test database contains the correct data and uses the full DAO
+  implementation for your tests. Using DI, you can create a mock implementation of the DAO object that returns the test
+  data sets, and then you can pass this to your business object for testing. This mechanism can be extended for testing
+  any tier of your application and is especially useful for testing web components where you can create mock
+  implementations of HttpServletRequest and HttpServletResponse.
+* Fostering of good application design:
+  Designing for DI means, in general, designing against interfaces. A typical injection-oriented application is designed
+  so that all major components are defined as interfaces, and then concrete implementations of these interfaces are
+  created and hooked together using the DI container. This kind of design was possible in Java before the advent of DI
+  and DI-based containers such as Spring, but by using Spring, you get a whole host of DI features for free, and you are
+  able to concentrate on building your application logic, not a framework to support it.
+
+Spring provides features for all layers of an application:
+
+* Managing Transactions
+* Aspect-Oriented Programming with Spring
+* Spring Expression Language
+* Validation in Spring
+* Accessing Data in Spring
+* Object/XML Mapping in Spring
+* Simplifying and Integrating with JEE
+* MVC in the Web Tier
+* WebSocket Support
+* Remoting Support
+* Mail Support
+* Job Scheduling Support
+* Dynamic Scripting Support
+* Simplified Exception Handling
+
+#### Spring Transaction Management
+
+As we mentioned earlier, the TransactionDefinition interface controls the properties of a transaction. Let’s take a more
+detailed look at the TransactionDefinition interface, shown here, and describe its methods:
+
+```java
+package org.springframework.transaction;
+
+import java.sql.Connection;
+
+public interface TransactionDefinition {
+    // Variable declaration statements omitted
+
+    int getPropagationBehavior();
+
+    int getIsolationLevel();
+
+    int getTimeout();
+
+    boolean isReadOnly();
+
+    String getName();
+}
+```
+
+We begin with getIsolationLevel(), which controls what changes to the data other transactions see. Table 9-1 lists the
+transaction isolation levels you can use and explains what changes made in the current transaction other transactions
+can access. The isolation levels are represented as static values defined in the TransactionDefinition interface.
+
+Table 9-1. Transaction Isolation Levels
+
+|      Isolation Level       | Description |
+|----------------------------|-------------|
+| ISOLATION_DEFAULT          | Default isolation level of the underlying data store. |
+| ISOLATION_READ_UNCOMMITTED | Lowest level of isolation; it is barely a transaction at all because it allows this transaction to see data modified by other uncommitted transactions. |
+| ISOLATION_READ_COMMITTED   | Default level in most databases; it ensures that other transactions are not able to read data that has not been committed by other transactions. However, the data that was read by one transaction can be updated by other transactions. |
+| ISOLATION_REPEATABLE_READ  | Stricter than ISOLATION_READ_COMMITTED; it ensures that once you select data, you can select at least the same set again. However, if other transactions insert new data, you can still select the newly inserted data. |
+| ISOLATION_SERIALIZABLE     | The most expensive and reliable isolation level; all transactions are treated as if they were executed one after another. |
+
+The getPropagationBehavior() method specifies what happens to a transactional call, depending on whether there is an
+active transaction. Table 9-2 describes the values for this method. The propagation types are represented as static
+values defined in the TransactionDefinition interface.
+
+Table 9-2. Transaction Isolation Levels
+
+|     Propagation Type      | Description |
+|---------------------------|-------------|
+| PROPAGATION_REQUIRED      | Description Supports a transaction if one already exists. If there is no transaction, it starts a new one. Supports a |
+| PROPAGATION_SUPPORTS      | transaction if one already exists. If there is no transaction, it executes nontransactionally. Supports a transaction if |
+| PROPAGATION_MANDATORY     | one already exists. Throws an exception if there is no active transaction. Always starts a new transaction. If an active |
+| PROPAGATION_REQUIRES_NEW  | transaction already exists, it is suspended. Does not support execution with an active transaction. Always executes |
+| PROPAGATION_NOT_SUPPORTED | nontransactionally and suspends any existing transaction. Always executes nontransactionally even if an active |
+| PROPAGATION_NEVER         | transaction exists. Throws an exception if an active transaction exists. Runs in a nested transaction if an active |
+| PROPAGATION_NESTED        | transaction exists. If there is no active transaction, the execution is executed as if PROPAGATION_REQUIRED is set. |
+
+When using annotation-based transaction management, the only annotation that we need to deal with is `@Transactional`.
+In the previous code snippet, the `@Transactional` annotation is applied at the class level, which means that, by
+default, Spring will ensure that a transaction is present before the execution of each method within the class. The
+`@Transactional` annotation supports a number of attributes that you can provide to override the default behavior. Table
+9-3 shows the available attributes, together with the possible and default values.
+
+Table 9-3. Attributes for the @Transactional Annotation
+
+|    Propagation Type    | Default Value | Possible Values  |
+|------------------------|---------------|------------------|
+| propagation            | Propagation.REQUIRED | Propagation.REQUIRED<br/>Propagation.SUPPORTS<br/>Propagation.MANDATORY<br/>Propagation.REQUIRES_NEW<br/>Propagation.NOT_SUPPORTED<br/>Propagation.NEVER<br/>Propagation.NESTED |
+| isolation              | Isolation.DEFAULT (default isolation level of the underlying resource) | Isolation.DEFAULT<br/>Isolation.READ_UNCOMMITTED<br/>Isolation.READ_COMMITTED<br/>Isolation.REPEATABLE_READ<br/>Isolation.SERIALIZABLE |
+| timeout                | TransactionDefinition.TIMEOUT_DEFAULT | An integer value larger than zero;<br/>indicates the number in seconds for timeout |
+| readOnly               | (default transaction timeout in seconds of the underlying resource) | {true, false} |
+| rollbackFor            | false | N/A |
+| rollbackForClassName   | Exception classes for which the transaction will be rolled back | N/A |
+| noRollbackFor          | Exception class names for which the transaction will be rolled back | N/A |
+| noRollbackForClassName | Exception classes for which the transaction will not be rolled back | N/A |
+| value                  | Exception class names for which the transaction will not be rolled back | N/A |
 
 #### Spring AOP
 
@@ -261,18 +598,20 @@ There are two distinct types of AOP: static and dynamic.
 
 Table 1. Advice Types in Spring.
 
-| Advice Name   | Interface and description |
-| ------------- | ------------------------- |
-| Before  | `org.springframework.aop.MethodBeforeAdvice` Using before advice, you can perform custom processing before a joinpoint executes. Because a joinpoint in Spring is always a method invocation, this essentially allows you to perform preprocessing before the method executes. Before advice has full access to the target of the method invocation as well as the arguments passed to the method, but it has no control over the execution of the method itself. If the before advice throws an exception, further execution of the interceptor chain (as well as the target method) will be aborted, and the exception will propagate back up the interceptor chain.|
+|    Advice Name   | Interface and description |
+|------------------|---------------------------|
+| Before           | `org.springframework.aop.MethodBeforeAdvice` Using before advice, you can perform custom processing before a joinpoint executes. Because a joinpoint in Spring is always a method invocation, this essentially allows you to perform preprocessing before the method executes. Before advice has full access to the target of the method invocation as well as the arguments passed to the method, but it has no control over the execution of the method itself. If the before advice throws an exception, further execution of the interceptor chain (as well as the target method) will be aborted, and the exception will propagate back up the interceptor chain.|
 | After-Returning  | `org.springframework.aop.AfterReturningAdvice` After-returning advice is executed after the method invocation at the joinpoint has finished executing and has returned a value. The after- returning advice has access to the target of the method invocation, the arguments passed to the method, and the return value. Because the method has already executed when the after-returning advice is invoked, it has no control over the method invocation at all. If the target method throws an exception, the after- returning advice will not be run, and the exception will be propagated up to the call stack as usual. |
-| After(finally)  | `org.springframework.aop.AfterAdvice` After-returning advice is executed only when the advised method completes normally. However, the after (finally) advice will be executed no matter the result of the advised method. The advice is executed even when the advised method fails and an exception is thrown. |
-| Around  | `org.aopalliance.intercept.MethodInterceptor` In Spring, around advice is modeled using the AOP Alliance standard of a method interceptor. Your advice is allowed to execute before and after the method invocation, and you can control the point at which the method invocation is allowed to proceed. You can choose to bypass the method altogether if you want, providing your own implementation of the logic. |
-| Throws | `org.springframework.aop.ThrowsAdvice` Throws advice is executed after a method invocation returns, but only if that invocation threw an exception. It is possible for throws advice to catch only specific exceptions, and if you choose to do so, you can access the method that threw the exception, the arguments passed into the invocation, and the target of the invocation. |
-| Introduction  | `org.springframework.aop.IntroductionInterceptor` Spring models introductions as special types of interceptors. Using an introduction interceptor, you can specify the implementation for methods that are being introduced by the advice. |
+| After(finally)   | `org.springframework.aop.AfterAdvice` After-returning advice is executed only when the advised method completes normally. However, the after (finally) advice will be executed no matter the result of the advised method. The advice is executed even when the advised method fails and an exception is thrown. |
+| Around           | `org.aopalliance.intercept.MethodInterceptor` In Spring, around advice is modeled using the AOP Alliance standard of a method interceptor. Your advice is allowed to execute before and after the method invocation, and you can control the point at which the method invocation is allowed to proceed. You can choose to bypass the method altogether if you want, providing your own implementation of the logic. |
+| Throws           | `org.springframework.aop.ThrowsAdvice` Throws advice is executed after a method invocation returns, but only if that invocation threw an exception. It is possible for throws advice to catch only specific exceptions, and if you choose to do so, you can access the method that threw the exception, the arguments passed into the invocation, and the target of the invocation. |
+| Introduction     | `org.springframework.aop.IntroductionInterceptor` Spring models introductions as special types of interceptors. Using an introduction interceptor, you can specify the implementation for methods that are being introduced by the advice. |
 
 #### Spring JDBC
 
 #### Spring WebFlux
+
+### Vert.x
 
 ### Maven and Gradle
 
