@@ -1,8 +1,6 @@
 *[English](README.md) ∙ [Русский](README-ru.md)*
 
-## Common topics
-
-### Programming paradigms
+## Programming paradigms
 
 * **imperative** in which the programmer instructs the machine how to change its state
     * *structured and procedural* - most often we should be able to use the term interchangeably but with subtle
@@ -15,7 +13,7 @@
     * *logic* in which the desired result is declared as the answer to a question about a system of facts and rules.
     * *reactive* in which the desired result is declared with data streams and the propagation of change
 
-#### Object-oriented programming (OOP)
+### Object-oriented programming (OOP)
 
 Alan Kay summarized five basic characteristics of Smalltalk, the first successful object-oriented language and one of
 the languages upon which Java is based. These characteristics represent a pure approach to object-oriented programming:
@@ -53,7 +51,7 @@ Basic principles of structuring:
   – the parent class or one of its descendants. Meanwhile, the same operation name among objects in an inheritance
   hierarchy may behave differently.
 
-#### Aspect-oriented programming (AOP)
+### Aspect-oriented programming (AOP)
 
 AOP is often referred to as a tool for implementing crosscutting concerns. The term crosscutting concerns refers to
 logic in an application that cannot be decomposed from the rest of the application and may result in code duplication
@@ -98,27 +96,27 @@ logic:
       methods or fields to it. You can use introduction AOP to make any object implement a specific interface without
       needing the object’s class to implement that interface explicitly.
 
-### Data structures
+## Data structures
 
 * List
 * Black-white tree
 * BI-tree
 
-### O-notation
+## O-notation
 
-### Algorithm complexity
+## Algorithm complexity
 
-### SOLID, DRY
+## SOLID, DRY
 
-### Programming patterns
+## Programming patterns
 
-### Software development process
+## Software development process
 
 Test-driven development (TDD)
 
 Model Driven Architecture (MDA)
 
-#### Agile
+### Agile
 
 Agile software development values. Based on their combined experience of developing software and helping others do that, the authors of the manifesto declared that they valued:[4]
 
@@ -142,17 +140,43 @@ Agile software development principles. The Manifesto for Agile Software Developm
 11. Best architectures, requirements, and designs emerge from self-organizing teams.
 12. Regularly, the team reflects on how to become more effective, and adjusts accordingly.
 
-### JSON, Protocol Buffers (Protobuf)
+## JSON, Protocol Buffers (Protobuf)
 
-### Protocols
+## Protocols
 
-- SOAP
-- STOMP
+Open Systems Interconnection (OSI) model:
+
+|      Layer     | Protocol data unit (PDU) |  Function  |
+|----------------|--------------------------|------------|
+| 7 Application  | Data                     | High-level protocols such as for resource sharing or remote file access, e.g. HTTP. |
+| 6 Presentation | Data                     | Translation of data between a networking service and an application; including character encoding, data compression and encryption/decryption |
+| 5 Session      | Data                     | Managing communication sessions, i.e., continuous exchange of information in the form of multiple back-and-forth transmissions between two nodes |
+| 4 Transport    | Segment, Datagram        | Reliable transmission of data segments between points on a network, including segmentation, acknowledgement and multiplexing |
+| 3 Network      | Packet                   | Structuring and managing a multi-node network, including addressing, routing and traffic control |
+| 2 Data link    | Frame                    | Transmission of data frames between two nodes connected by a physical layer |
+| 1 Physical     | Bit, Symbol              | Transmission and reception of raw bit streams over a physical medium |
+
+- **Simple Object Access Protocol (SOAP)**
+  Messaging protocol specification for exchanging structured information in the implementation of web services in computer networks. It uses XML Information Set for its message format, and can operate over any protocol such as HTTP, SMTP, TCP, UDP, JMS and message queues.
+- **Advanced Message Queuing Protocol (AMQP)**
+  AMQP is a binary, application layer protocol, designed to efficiently support a wide variety of messaging applications and 
+  communication patterns. It provides flow controlled, message-oriented communication with message-delivery guarantees such as at- 
+  most-once (where each message is delivered once or never), at-least-once (where each message is certain to be delivered, but may do so 
+  multiple times) and exactly-once (where the message will always certainly arrive and do so only once),[4] and authentication and/or 
+  encryption based on SASL and/or TLS. It assumes an underlying reliable transport layer protocol such as Transmission Control 
+  Protocol (TCP).
+
+  The AMQP specification is defined in several layers: (i) a type system, (ii) a symmetric, asynchronous protocol for the transfer of 
+  messages from one process to another, (iii) a standard, extensible message format and (iv) a set of standardised but extensible 
+  'messaging capabilities.'
+- **Streaming Text Oriented Messaging Protocol (STOMP)**
+  STOMP provides an interoperable wire format so that STOMP clients can communicate with any STOMP message broker to provide easy and 
+  widespread messaging interoperability among many languages, platforms and brokers. It works over TCP.
 - HTTP
+- HTTPS
 - TCP
--
 
-### REST, RPC
+## REST, RPC
 
 Representational state transfer (REST) is a software architectural style that was created to guide the design and
 development of the architecture for the World Wide Web. The term representational state transfer was introduced and
@@ -203,7 +227,20 @@ receive the representation of a resource, and so on.
       server responds with text that includes hyperlinks to other resources that are currently available. There is no
       need for the client to be hard-coded with information regarding the structure of the server.
 
-### Math
+## Database
+
+### SQL
+
+### RDBMS
+
+### NoSQL
+
+### Database-migration tools
+
+* Flyway
+* Liquibase
+
+## Math
 
 ## Java
 
@@ -617,24 +654,16 @@ Table 1. Advice Types in Spring.
 
 ### Bootstrap ClassLoader ⭐
 
-## Surrounding technologies
+## GIT
 
-### GIT
+## Kubernetes
 
-### Kubernetes
-
-### RDBMS and SQL
-
-### NoSQL
-
-### Flyway vs Liquibase
-
-### Message brokers
+## Message brokers
 
 * Kafka
 * RabbitMQ
 
-### Practice
+## Practice
 
 * https://leetcode.com
 * https://www.hackerrank.com
