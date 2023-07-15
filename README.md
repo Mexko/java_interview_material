@@ -310,9 +310,39 @@ Synchronization is required for reliable communication between threads as well a
 
 ### Garbage collectors (GC)
 
-*Garbage Collection* tracks each and every object available in the JVM heap space, and removes the unused ones.
+*Garbage collectors* track each and every object available in the JVM heap space, and remove the unused ones.
+Garbage collectors work on the concept of Garbage Collection Roots (GC Roots) to identify live and dead objects.
 
-Garbage collectors available in Java JDKs include:
+Examples of such Garbage Collection roots are:
+- Classes loaded by system class loader (not custom class loaders).
+- Live threads.
+- Local variables and parameters of the currently executing methods.
+- Local variables and parameters of JNI methods.
+- Global JNI reference.
+- Objects used as a monitor for synchronization.
+- Objects held from garbage collection by JVM for its purposes.
+- The garbage collector traverses the whole object graph in memory, starting from those Garbage Collection Roots and following references from the roots to other objects.
+
+A standard Garbage Collection implementation involves three phases:
+
+1. *Mark objects as alive.*
+In this step, the GC identifies all the live objects in memory by traversing the object graph.
+When GC visits an object, it marks it as accessible and thus alive. Every object the garbage collector visits is marked as alive. All the objects which are not reachable from GC Roots are garbage and considered as candidates for garbage collection.
+
+2. *Sweep dead objects.*
+After marking phase, we have the memory space which is occupied by live (visited) and dead (unvisited) objects. The sweep phase releases the memory fragments which contain these dead objects.
+
+3. *Compact remaining objects in memory.*
+The dead objects that were removed during the sweep phase may not necessarily be next to each other. Thus, you can end up having fragmented memory space.
+Memory can be compacted after the garbage collector deletes the dead objects, so that the remaining objects are in a contiguous block at the start of the heap.
+The compaction process makes it easier to allocate memory to new objects sequentially.
+
+Generational garbage collection strategy.
+
+As more and more objects are allocated, the list of objects grows, leading to longer garbage collection times. Empirical analysis of applications has shown that most objects in Java are short lived. 
+Young Generation (Eden space, Survivor spaces) -> Old Generation (Tenured Generation)
+
+Types of Garbage Collectors in the Java Virtual Machine:
 
 * **Serial Garbage Collector**
 
@@ -327,7 +357,7 @@ Garbage collectors available in Java JDKs include:
 
 * **Parallel Garbage Collector**
 
-  It's the default GC of the JVM, and sometimes called Throughput Collectors. Unlike Serial Garbage Collector, it uses
+  It's the default GC of the JVM, and sometimes called Throughput Collector. Unlike Serial Garbage Collector, it uses
   multiple threads for managing heap space, but it also freezes other application threads while performing GC. If we use
   this GC, we can specify maximum garbage collection threads and pause time, throughput, and footprint (heap size). The
   numbers of garbage collector threads can be controlled with the command-line option -XX:ParallelGCThreads=<N>. The
@@ -678,3 +708,4 @@ Table 1. Advice Types in Spring.
    *Iuliana Cosmina, Rob Harrop, Chris Schaefer, Clarence Ho.*
 2. Effective Java. Third Edition. *Joshua Bloch.*
 3. Thinking in Java, Fourth Edition. *Bruce Eckel.*
+4. oracle.com
